@@ -8,6 +8,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
   <style>
+    /* ══════════════════════════════════════════
+       LIGHT MODE (default)
+    ══════════════════════════════════════════ */
     :root {
       --primary: #1a3a2a;
       --accent: #e8a020;
@@ -19,23 +22,79 @@
       --green-light: #e8f2ec;
       --card-bg: #ffffff;
       --border: #e0d8c8;
+
+      /* Extra tokens used only in dark mode below */
+      --exp-card-bg: #ffffff;
+      --pelatihan-card-bg: #ffffff;
+      --edu-card-bg: #f8f5ef;
+      --org-card-bg: #f8f5ef;
+      --kontak-card-bg: #ffffff;
+      --tag-bg: #e8f2ec;
+      --tag-border: #b8dac5;
+      --tag-color: #1a3a2a;
+      --nav-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      --hero-bg: #ffffff;
+
+      /* Ticker (always dark-green, not affected by theme) */
+      --ticker-bg: #1a3a2a;
+
+      /* About section (always dark-green) */
+      --about-bg: #1a3a2a;
+      --about-card-bg: rgba(255,255,255,0.08);
+      --about-card-border: rgba(255,255,255,0.15);
+      --about-title-color: #ffffff;
+      --about-text-color: rgba(255,255,255,0.7);
+      --stat-label-color: rgba(255,255,255,0.6);
+      --about-info-label: rgba(255,255,255,0.5);
+      --about-info-value: #ffffff;
     }
 
+    /* ══════════════════════════════════════════
+       DARK MODE — comprehensive overrides
+    ══════════════════════════════════════════ */
     body.dark-mode {
-      --primary: #d8eadf;
-      --accent: #f0b347;
-      --accent2: #ffcf77;
-      --light-bg: #0d1512;
-      --white: #111b17;
-      --text: #edf5f0;
-      --text-muted: #aec0b6;
-      --green-light: #162620;
-      --card-bg: #14201b;
-      --border: #24362f;
+      /* Core palette */
+      --primary: #7ecfa0;          /* soft green — readable on dark bg */
+      --accent: #f5b84a;
+      --accent2: #ffd07a;
+      --light-bg: #0e1512;         /* very dark green-black */
+      --white: #141f1a;            /* dark card / nav bg */
+      --text: #e8f5ee;             /* near-white body text */
+      --text-muted: #8fb8a0;       /* muted green-grey */
+      --green-light: #1c2e25;      /* subtle dark green tint */
+      --card-bg: #1a2820;
+      --border: #2a3d33;
+
+      /* Card backgrounds (slightly lighter than page bg) */
+      --exp-card-bg: #1a2820;
+      --pelatihan-card-bg: #1a2820;
+      --edu-card-bg: #1a2820;
+      --org-card-bg: #1a2820;
+      --kontak-card-bg: #1a2820;
+
+      /* Tags — dark but visible */
+      --tag-bg: #1c3328;
+      --tag-border: #2d5040;
+      --tag-color: #7ecfa0;
+
+      /* Nav */
+      --nav-shadow: 0 2px 20px rgba(0,0,0,0.35);
+
+      /* Hero */
+      --hero-bg: #141f1a;
+
+      /* About section stays rich dark-green (it's always inverted) */
+      --about-bg: #0b1812;
+      --about-card-bg: rgba(255,255,255,0.06);
+      --about-card-border: rgba(255,255,255,0.1);
+      --about-title-color: #e8f5ee;
+      --about-text-color: rgba(232,245,238,0.7);
+      --stat-label-color: rgba(232,245,238,0.55);
+      --about-info-label: rgba(232,245,238,0.45);
+      --about-info-value: #e8f5ee;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -43,7 +102,7 @@
       background: var(--light-bg);
       color: var(--text);
       overflow-x: hidden;
-      transition: background 0.3s ease, color 0.3s ease;
+      transition: background 0.35s ease, color 0.35s ease;
     }
 
     /* ─── NAVBAR ─── */
@@ -54,8 +113,8 @@
       padding: 0 5%;
       display: flex; align-items: center; justify-content: space-between;
       height: 68px;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
-      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: var(--nav-shadow);
+      transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
     }
     .nav-logo {
       display: flex; align-items: center; gap: 10px;
@@ -65,131 +124,97 @@
     }
     .nav-logo img {
       width: 38px; height: 38px; border-radius: 50%;
-      object-fit: cover;
-      object-position: center top;
+      object-fit: cover; object-position: center top;
       border: 2px solid rgba(232,160,32,0.45);
       display: block;
     }
-    .nav-links {
-      display: flex; gap: 2rem; list-style: none;
-    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
       text-decoration: none; color: var(--text-muted);
-      font-size: 0.9rem; font-weight: 500;
-      transition: color 0.2s;
+      font-size: 0.9rem; font-weight: 500; transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--primary); }
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
+    .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+
     .theme-toggle {
-      width: 44px;
-      height: 44px;
-      border-radius: 999px;
+      width: 44px; height: 44px; border-radius: 999px;
       border: 1px solid var(--border);
-      background: var(--white);
-      color: var(--primary);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      background: var(--white); color: var(--primary);
+      display: inline-flex; align-items: center; justify-content: center;
       cursor: pointer;
-      transition: transform 0.2s, background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+      transition: transform 0.2s, background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
     }
     .theme-toggle:hover { transform: translateY(-1px); }
     .theme-toggle svg { width: 18px; height: 18px; }
+
     .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--primary);
-      color: white; border: none; border-radius: 50px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--primary); color: white;
+      border: none; border-radius: 50px;
       padding: 10px 24px; font-size: 0.9rem; font-weight: 500;
       cursor: pointer; transition: background 0.2s, transform 0.2s;
-      font-family: 'DM Sans', sans-serif;
-      text-decoration: none;
+      font-family: 'DM Sans', sans-serif; text-decoration: none;
     }
     .nav-cta:hover { background: var(--accent); transform: translateY(-1px); }
+    body.dark-mode .nav-cta { color: #0e1512; }
 
     /* ─── HERO ─── */
     #hero {
-      min-height: 100vh;
-      padding: 68px 5% 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 4rem;
-      background: var(--white);
-      position: relative;
-      overflow: hidden;
+      min-height: 100vh; padding: 68px 5% 0;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; gap: 4rem;
+      background: var(--hero-bg);
+      position: relative; overflow: hidden;
+      transition: background 0.35s ease;
     }
     #hero::before {
-      content: '';
-      position: absolute; top: -80px; right: -80px;
-      width: 500px; height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #e8f2ec 0%, transparent 70%);
-      z-index: 0;
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, var(--green-light) 0%, transparent 70%);
+      z-index: 0; transition: background 0.35s ease;
     }
     #hero::after {
-      content: '';
-      position: absolute; bottom: -60px; left: 10%;
-      width: 300px; height: 300px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #fef3e0 0%, transparent 70%);
+      content: ''; position: absolute; bottom: -60px; left: 10%;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,160,32,0.08) 0%, transparent 70%);
       z-index: 0;
     }
     .hero-text { position: relative; z-index: 1; }
+
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--green-light);
-      border: 1px solid #b8dac5;
+      background: var(--tag-bg); border: 1px solid var(--tag-border);
       border-radius: 50px; padding: 6px 16px;
-      font-size: 0.8rem; color: var(--primary); font-weight: 500;
-      margin-bottom: 1.5rem;
-      animation: fadeInUp 0.6s ease forwards;
+      font-size: 0.8rem; color: var(--tag-color); font-weight: 500;
+      margin-bottom: 1.5rem; animation: fadeInUp 0.6s ease forwards;
+      transition: background 0.35s, border-color 0.35s, color 0.35s;
     }
     .hero-badge::before {
       content: ''; width: 8px; height: 8px; border-radius: 50%;
-      background: #28a745; display: block;
-      animation: pulse 2s infinite;
+      background: #28a745; display: block; animation: pulse 2s infinite;
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.5; transform: scale(1.3); }
     }
-    .hero-greeting {
-      font-size: 1rem; color: var(--text-muted); margin-bottom: 0.5rem;
-      animation: fadeInUp 0.6s 0.1s ease both;
-    }
+
+    .hero-greeting { font-size: 1rem; color: var(--text-muted); margin-bottom: 0.5rem; animation: fadeInUp 0.6s 0.1s ease both; }
     .hero-name {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.4rem, 4vw, 3.5rem);
-      font-weight: 700; line-height: 1.15;
-      color: var(--text);
-      margin-bottom: 0.3rem;
-      animation: fadeInUp 0.6s 0.2s ease both;
+      font-size: clamp(2.4rem, 4vw, 3.5rem); font-weight: 700; line-height: 1.15;
+      color: var(--text); margin-bottom: 0.3rem; animation: fadeInUp 0.6s 0.2s ease both;
     }
-    .hero-name em {
-      font-style: italic; color: var(--accent);
-    }
+    .hero-name em { font-style: italic; color: var(--accent); }
     .hero-title {
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
-      font-weight: 600; color: var(--primary);
-      margin-bottom: 1.2rem;
-      animation: fadeInUp 0.6s 0.3s ease both;
+      font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 600; color: var(--primary);
+      margin-bottom: 1.2rem; animation: fadeInUp 0.6s 0.3s ease both;
     }
     .hero-desc {
-      font-size: 0.95rem; color: var(--text-muted);
-      line-height: 1.8; max-width: 480px;
-      margin-bottom: 2rem;
-      animation: fadeInUp 0.6s 0.4s ease both;
+      font-size: 0.95rem; color: var(--text-muted); line-height: 1.8;
+      max-width: 480px; margin-bottom: 2rem; animation: fadeInUp 0.6s 0.4s ease both;
     }
-    .hero-buttons {
-      display: flex; gap: 1rem; flex-wrap: wrap;
-      animation: fadeInUp 0.6s 0.5s ease both;
-    }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeInUp 0.6s 0.5s ease both; }
+
     .btn-primary {
       display: flex; align-items: center; gap: 8px;
       background: var(--primary); color: white;
@@ -199,6 +224,9 @@
     }
     .btn-primary:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(232,160,32,0.3); }
     .btn-primary svg { width: 18px; height: 18px; }
+    body.dark-mode .btn-primary { color: #0e1512; }
+    body.dark-mode .btn-primary:hover { color: #0e1512; }
+
     .btn-secondary {
       display: flex; align-items: center; gap: 8px;
       background: transparent; color: var(--primary);
@@ -208,75 +236,15 @@
     }
     .btn-secondary:hover { border-color: var(--primary); background: var(--green-light); }
 
-    .custom-cursor,
-    .custom-cursor-ring {
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 1000;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-    .custom-cursor {
-      width: 8px;
-      height: 8px;
-      margin-left: -4px;
-      margin-top: -4px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-    .custom-cursor-ring {
-      width: 36px;
-      height: 36px;
-      margin-left: -18px;
-      margin-top: -18px;
-      border-radius: 50%;
-      border: 1px solid rgba(232,160,32,0.45);
-      background: rgba(232,160,32,0.08);
-      --cursor-scale: 1;
-      transition: transform 0.18s ease, opacity 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-    }
-    body.cursor-active .custom-cursor,
-    body.cursor-active .custom-cursor-ring {
-      opacity: 1;
-    }
-    body.cursor-hover .custom-cursor-ring {
-      --cursor-scale: 1.45;
-      background: rgba(232,160,32,0.16);
-      border-color: rgba(232,160,32,0.75);
-    }
-
-    body.dark-mode .hero-badge,
-    body.dark-mode .skill-tag,
-    body.dark-mode .exp-period,
-    body.dark-mode .pelatihan-period {
-      background: #89c8a2;
-      border-color: #89c8a2;
-      color: #0b1711;
-    }
-
-    body.dark-mode .btn-secondary:hover {
-      color: #0b1711;
-    }
-
-    body.dark-mode .hero-badge::before {
-      background: #0b1711;
-    }
-
-    /* Tags marquee */
-    .hero-tags {
-      display: flex; gap: 0.6rem; flex-wrap: wrap;
-      margin-top: 2rem;
-      animation: fadeInUp 0.6s 0.6s ease both;
-    }
+    .hero-tags { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 2rem; animation: fadeInUp 0.6s 0.6s ease both; }
     .hero-tag {
       background: var(--light-bg); border: 1px solid var(--border);
       border-radius: 50px; padding: 5px 14px; font-size: 0.78rem;
       color: var(--text-muted); font-weight: 500;
+      transition: background 0.35s, border-color 0.35s, color 0.35s;
     }
 
-    /* Hero image side */
+    /* Hero image */
     .hero-image-wrap {
       position: relative; z-index: 1;
       display: flex; justify-content: center; align-items: center;
@@ -289,21 +257,16 @@
       display: flex; align-items: flex-end; justify-content: center;
       overflow: hidden; position: relative;
     }
-    .hero-photo {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
+    .hero-photo { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
     .hero-float-badge {
-      position: absolute;
-      background: white;
-      border-radius: 16px;
-      padding: 10px 16px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      position: absolute; background: var(--kontak-card-bg);
+      border-radius: 16px; padding: 10px 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.18);
       font-size: 0.78rem; font-weight: 600; color: var(--primary);
       display: flex; align-items: center; gap: 8px;
+      border: 1px solid var(--border); transition: background 0.35s, color 0.35s, border-color 0.35s;
     }
+    .hero-float-badge .badge-sub { font-size: 0.7rem; color: var(--text-muted); font-weight: 400; }
     .hero-float-badge.top-left { top: 10px; left: -20px; }
     .hero-float-badge.bottom-right { bottom: 40px; right: -20px; }
     .hero-float-badge .badge-icon {
@@ -313,20 +276,10 @@
     }
 
     /* ─── TICKER ─── */
-    .ticker-wrap {
-      background: var(--primary);
-      padding: 14px 0;
-      overflow: hidden; position: relative;
-    }
-    .ticker-inner {
-      display: flex; gap: 0; white-space: nowrap;
-      animation: ticker 20s linear infinite;
-    }
-    .ticker-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 0 2rem; color: rgba(255,255,255,0.85);
-      font-size: 0.85rem; font-weight: 500;
-    }
+    .ticker-wrap { background: var(--ticker-bg); padding: 14px 0; overflow: hidden; position: relative; }
+    body.dark-mode .ticker-wrap { background: #0b1812; border-top: 1px solid #2a3d33; border-bottom: 1px solid #2a3d33; }
+    .ticker-inner { display: flex; gap: 0; white-space: nowrap; animation: ticker 20s linear infinite; }
+    .ticker-item { display: flex; align-items: center; gap: 12px; padding: 0 2rem; color: rgba(255,255,255,0.85); font-size: 0.85rem; font-weight: 500; }
     .ticker-dot { color: var(--accent); font-size: 1.2rem; }
     @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
@@ -335,330 +288,203 @@
     .section-eyebrow {
       display: flex; align-items: center; gap: 10px;
       color: var(--accent); font-size: 0.8rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.1em;
-      margin-bottom: 0.8rem;
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.8rem;
     }
-    .section-eyebrow::before {
-      content: ''; width: 24px; height: 2px; background: var(--accent);
-    }
+    .section-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--accent); }
     .section-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 700; line-height: 1.2;
-      color: var(--primary);
-      margin-bottom: 1rem;
+      font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; line-height: 1.2;
+      color: var(--primary); margin-bottom: 1rem;
     }
     .section-title em { font-style: italic; color: var(--accent); }
-    .section-sub {
-      color: var(--text-muted); font-size: 0.95rem;
-      line-height: 1.7; max-width: 560px;
-    }
+    .section-sub { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; max-width: 560px; }
 
     /* ─── KEAHLIAN ─── */
-    #keahlian {
-      background: var(--white);
-    }
-    .skills-header {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;
-    }
-    .skills-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
+    #keahlian { background: var(--white); transition: background 0.35s ease; }
+    .skills-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
     .skill-card {
-      background: var(--light-bg);
-      border: 1px solid var(--border);
-      border-radius: 20px; padding: 2rem;
-      transition: all 0.3s;
-      cursor: default;
+      background: var(--light-bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2rem; transition: all 0.3s; cursor: default;
     }
-    .skill-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent);
-      box-shadow: 0 12px 40px rgba(232,160,32,0.12);
-    }
-    .skill-icon {
-      width: 50px; height: 50px; border-radius: 14px;
-      background: var(--primary);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.2rem; font-size: 1.3rem;
-    }
-    .skill-card h3 {
-      font-size: 1rem; font-weight: 600; color: var(--primary);
-      margin-bottom: 0.7rem;
-    }
-    .skill-card p {
-      font-size: 0.85rem; color: var(--text-muted); line-height: 1.7;
-    }
+    body.dark-mode .skill-card { background: var(--card-bg); }
+    .skill-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 12px 40px rgba(232,160,32,0.12); }
+    .skill-icon { width: 50px; height: 50px; border-radius: 14px; background: var(--primary); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; font-size: 1.3rem; }
+    .skill-card h3 { font-size: 1rem; font-weight: 600; color: var(--primary); margin-bottom: 0.7rem; }
+    .skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
     .skill-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
     .skill-tag {
-      background: var(--green-light); border: 1px solid #b8dac5;
-      border-radius: 50px; padding: 3px 12px;
-      font-size: 0.75rem; color: var(--primary); font-weight: 500;
+      background: var(--tag-bg); border: 1px solid var(--tag-border);
+      border-radius: 50px; padding: 3px 12px; font-size: 0.75rem;
+      color: var(--tag-color); font-weight: 500;
+      transition: background 0.35s, border-color 0.35s, color 0.35s;
     }
 
     /* ─── PENGALAMAN ─── */
-    #pengalaman { background: var(--light-bg); }
-    .exp-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 2rem; margin-top: 3rem;
-    }
+    #pengalaman { background: var(--light-bg); transition: background 0.35s ease; }
+    .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+
     .exp-card {
-      background: white; border-radius: 24px; padding: 2rem;
-      border: 1px solid var(--border);
-      transition: all 0.3s;
-      position: relative; overflow: hidden;
+      background: var(--exp-card-bg); border-radius: 24px; padding: 2rem;
+      border: 1px solid var(--border); transition: all 0.3s; position: relative; overflow: hidden;
     }
     .exp-card::before {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 4px;
-      background: var(--accent);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.4s;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
     }
-    .exp-card:hover { transform: translateY(-5px); box-shadow: 0 15px 50px rgba(0,0,0,0.08); }
+    .exp-card:hover { transform: translateY(-5px); box-shadow: 0 15px 50px rgba(0,0,0,0.12); }
     .exp-card:hover::before { transform: scaleX(1); }
-    .exp-meta {
-      display: flex; justify-content: space-between;
-      align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;
-    }
-    .exp-institution {
-      font-size: 0.8rem; color: var(--accent); font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.05em;
-    }
+    .exp-meta { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .exp-institution { font-size: 0.8rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
     .exp-period {
-      background: var(--green-light); border: 1px solid #b8dac5;
-      border-radius: 50px; padding: 3px 12px;
-      font-size: 0.75rem; color: var(--primary); font-weight: 500;
+      background: var(--tag-bg); border: 1px solid var(--tag-border);
+      border-radius: 50px; padding: 3px 12px; font-size: 0.75rem;
+      color: var(--tag-color); font-weight: 500;
+      transition: background 0.35s, border-color 0.35s, color 0.35s;
     }
-    .exp-role {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; font-weight: 600; color: var(--primary);
-      margin-bottom: 1.2rem;
-    }
+    .exp-role { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--primary); margin-bottom: 1.2rem; }
     .exp-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-    .exp-list li {
-      display: flex; gap: 10px; align-items: flex-start;
-      font-size: 0.87rem; color: var(--text-muted); line-height: 1.6;
-    }
-    .exp-list li::before {
-      content: '→'; color: var(--accent); flex-shrink: 0; font-weight: 600;
-    }
+    .exp-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.87rem; color: var(--text-muted); line-height: 1.6; }
+    .exp-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-weight: 600; }
 
     /* ─── TENTANG SAYA ─── */
     #tentang {
-      background: var(--primary);
-      color: white;
+      background: var(--about-bg);
+      color: white; transition: background 0.35s ease;
     }
-    .about-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 5rem; align-items: center;
-    }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
     .about-text .section-eyebrow { color: var(--accent); }
-    .about-text .section-title { color: white; }
-    .about-text .section-sub { color: rgba(255,255,255,0.7); max-width: 100%; }
-    .about-stats {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1.5rem; margin-top: 2.5rem;
-    }
+    .about-text .section-title { color: var(--about-title-color); }
+    .about-text .section-sub { color: var(--about-text-color); max-width: 100%; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
     .stat-card {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 16px; padding: 1.5rem;
-      text-align: center; transition: background 0.3s;
+      background: var(--about-card-bg); border: 1px solid var(--about-card-border);
+      border-radius: 16px; padding: 1.5rem; text-align: center; transition: background 0.3s;
     }
     .stat-card:hover { background: rgba(255,255,255,0.13); }
-    .stat-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem; font-weight: 700; color: var(--accent);
-      display: block;
-    }
-    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 0.3rem; }
-    .about-visual {
-      display: flex; flex-direction: column; gap: 1.2rem;
-    }
+    .stat-number { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--accent); display: block; }
+    .stat-label { font-size: 0.8rem; color: var(--stat-label-color); margin-top: 0.3rem; }
+    .about-visual { display: flex; flex-direction: column; gap: 1.2rem; }
     .about-info-card {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
+      background: var(--about-card-bg); border: 1px solid var(--about-card-border);
       border-radius: 20px; padding: 1.5rem 2rem;
-      display: flex; align-items: center; gap: 1.2rem;
-      transition: all 0.3s;
+      display: flex; align-items: center; gap: 1.2rem; transition: all 0.3s;
     }
     .about-info-card:hover { background: rgba(255,255,255,0.13); transform: translateX(6px); }
-    .about-info-icon {
-      width: 46px; height: 46px; border-radius: 12px;
-      background: var(--accent); display: flex; align-items: center;
-      justify-content: center; flex-shrink: 0; font-size: 1.2rem;
-    }
+    .about-info-icon { width: 46px; height: 46px; border-radius: 12px; background: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.2rem; }
     .about-info-content { flex: 1; }
-    .about-info-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-bottom: 0.2rem; }
-    .about-info-value { font-size: 0.95rem; font-weight: 500; color: white; }
+    .about-info-label { font-size: 0.75rem; color: var(--about-info-label); margin-bottom: 0.2rem; }
+    .about-info-value { font-size: 0.95rem; font-weight: 500; color: var(--about-info-value); }
 
     /* ─── ORGANISASI ─── */
-    #organisasi { background: var(--white); }
+    #organisasi { background: var(--white); transition: background 0.35s ease; }
     .org-card {
-      background: var(--light-bg); border: 1px solid var(--border);
+      background: var(--org-card-bg); border: 1px solid var(--border);
       border-radius: 24px; padding: 2.5rem;
-      display: grid; grid-template-columns: auto 1fr;
-      gap: 2rem; align-items: start;
-      max-width: 700px; margin: 3rem auto 0;
-      transition: all 0.3s;
+      display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start;
+      max-width: 700px; margin: 3rem auto 0; transition: all 0.3s;
     }
-    .org-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
-    .org-icon {
-      width: 64px; height: 64px; border-radius: 18px;
-      background: var(--primary); display: flex;
-      align-items: center; justify-content: center;
-      font-size: 1.8rem; flex-shrink: 0;
-    }
+    .org-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+    .org-icon { width: 64px; height: 64px; border-radius: 18px; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0; }
     .org-period {
-      display: inline-block;
-      background: rgba(232,160,32,0.15); color: var(--accent2);
-      border-radius: 50px; padding: 4px 14px;
-      font-size: 0.78rem; font-weight: 600;
-      margin-bottom: 0.7rem;
+      display: inline-block; background: rgba(232,160,32,0.15); color: var(--accent2);
+      border-radius: 50px; padding: 4px 14px; font-size: 0.78rem; font-weight: 600; margin-bottom: 0.7rem;
     }
-    .org-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem; font-weight: 700; color: var(--primary);
-      margin-bottom: 0.3rem;
-    }
+    body.dark-mode .org-period { background: rgba(245,184,74,0.15); color: var(--accent); }
+    .org-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--primary); margin-bottom: 0.3rem; }
     .org-role { font-size: 0.9rem; color: var(--accent); font-weight: 600; margin-bottom: 1rem; }
     .org-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-    .org-list li {
-      display: flex; gap: 10px; align-items: flex-start;
-      font-size: 0.87rem; color: var(--text-muted); line-height: 1.6;
-    }
+    .org-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.87rem; color: var(--text-muted); line-height: 1.6; }
     .org-list li::before { content: '◆'; color: var(--accent); font-size: 0.5rem; margin-top: 0.4em; flex-shrink: 0; }
 
     /* ─── PELATIHAN ─── */
-    #pelatihan { background: var(--light-bg); }
-    .pelatihan-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem; margin-top: 3rem;
-    }
+    #pelatihan { background: var(--light-bg); transition: background 0.35s ease; }
+    .pelatihan-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; }
     .pelatihan-card {
-      background: white; border-radius: 24px; padding: 2rem;
-      border: 1px solid var(--border);
-      transition: all 0.3s;
-      position: relative; overflow: hidden;
+      background: var(--pelatihan-card-bg); border-radius: 24px; padding: 2rem;
+      border: 1px solid var(--border); transition: all 0.3s; position: relative; overflow: hidden;
     }
     .pelatihan-card::before {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 4px;
-      background: var(--accent);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.4s;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
     }
-    .pelatihan-card:hover { transform: translateY(-5px); box-shadow: 0 15px 50px rgba(0,0,0,0.08); }
+    .pelatihan-card:hover { transform: translateY(-5px); box-shadow: 0 15px 50px rgba(0,0,0,0.12); }
     .pelatihan-card:hover::before { transform: scaleX(1); }
-    .pelatihan-meta {
-      display: flex; justify-content: space-between;
-      align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;
-    }
-    .pelatihan-provider {
-      font-size: 0.8rem; color: var(--accent); font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.05em;
-    }
+    .pelatihan-meta { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .pelatihan-provider { font-size: 0.8rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
     .pelatihan-period {
-      background: var(--green-light); border: 1px solid #b8dac5;
-      border-radius: 50px; padding: 3px 12px;
-      font-size: 0.75rem; color: var(--primary); font-weight: 500;
+      background: var(--tag-bg); border: 1px solid var(--tag-border);
+      border-radius: 50px; padding: 3px 12px; font-size: 0.75rem;
+      color: var(--tag-color); font-weight: 500;
+      transition: background 0.35s, border-color 0.35s, color 0.35s;
     }
-    .pelatihan-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem; font-weight: 600; color: var(--primary);
-      margin-bottom: 1rem;
-    }
+    .pelatihan-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--primary); margin-bottom: 1rem; }
     .pelatihan-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-    .pelatihan-list li {
-      display: flex; gap: 10px; align-items: flex-start;
-      font-size: 0.87rem; color: var(--text-muted); line-height: 1.6;
-    }
-    .pelatihan-list li::before {
-      content: '→'; color: var(--accent); flex-shrink: 0; font-weight: 600;
-    }
+    .pelatihan-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.87rem; color: var(--text-muted); line-height: 1.6; }
+    .pelatihan-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-weight: 600; }
     .cert-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      margin-top: 1rem;
-      color: var(--accent2); font-size: 0.8rem; font-weight: 600;
-      text-decoration: none;
-      border: 1px solid var(--accent);
-      border-radius: 50px; padding: 4px 14px;
-      transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 1rem;
+      color: var(--accent); font-size: 0.8rem; font-weight: 600;
+      text-decoration: none; border: 1px solid var(--accent);
+      border-radius: 50px; padding: 4px 14px; transition: all 0.2s;
     }
-    .cert-link:hover { background: var(--accent); color: white; }
+    .cert-link:hover { background: var(--accent); color: #0e1512; }
 
     /* ─── PENDIDIKAN ─── */
-    #pendidikan { background: var(--white); }
+    #pendidikan { background: var(--white); transition: background 0.35s ease; }
     .edu-card {
-      background: var(--light-bg); border-radius: 24px; padding: 2.5rem 3rem;
-      border: 1px solid var(--border); max-width: 700px;
-      margin: 3rem auto 0; position: relative; overflow: hidden;
-      transition: all 0.3s;
+      background: var(--edu-card-bg); border-radius: 24px; padding: 2.5rem 3rem;
+      border: 1px solid var(--border); max-width: 700px; margin: 3rem auto 0;
+      position: relative; overflow: hidden; transition: all 0.3s;
     }
-    .edu-card:hover { box-shadow: 0 15px 50px rgba(0,0,0,0.08); transform: translateY(-4px); }
-    .edu-year {
-      font-size: 0.8rem; color: var(--accent); font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;
-    }
-    .edu-uni {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 0.4rem;
-    }
+    .edu-card:hover { box-shadow: 0 15px 50px rgba(0,0,0,0.12); transform: translateY(-4px); }
+    .edu-year { font-size: 0.8rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+    .edu-uni { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 0.4rem; }
     .edu-degree { font-size: 1rem; color: var(--text-muted); margin-bottom: 0.3rem; }
-    .edu-desc {
-      font-size: 0.87rem; color: var(--text-muted); line-height: 1.7; margin-top: 1rem;
-    }
+    .edu-desc { font-size: 0.87rem; color: var(--text-muted); line-height: 1.7; margin-top: 1rem; }
 
     /* ─── KONTAK ─── */
-    #kontak {
-      background: var(--light-bg);
-      text-align: center;
-    }
-    .kontak-grid {
-      display: flex; justify-content: center; gap: 1.5rem;
-      flex-wrap: wrap; margin-top: 3rem;
-    }
+    #kontak { background: var(--light-bg); text-align: center; transition: background 0.35s ease; }
+    .kontak-grid { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 3rem; }
     .kontak-card {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: 20px; padding: 2rem 2.5rem;
-      width: 220px; transition: all 0.3s;
+      background: var(--kontak-card-bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2rem 2.5rem; width: 220px; transition: all 0.3s;
       text-decoration: none; color: inherit;
       display: flex; flex-direction: column; align-items: center; gap: 1rem;
     }
-    .kontak-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 12px 40px rgba(232,160,32,0.12); }
-    .kontak-icon {
-      width: 52px; height: 52px; border-radius: 14px;
-      background: var(--primary); display: flex;
-      align-items: center; justify-content: center; font-size: 1.3rem;
-    }
+    .kontak-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 12px 40px rgba(232,160,32,0.15); }
+    .kontak-icon { width: 52px; height: 52px; border-radius: 14px; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
     .kontak-label { font-size: 0.78rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
     .kontak-value { font-size: 0.9rem; font-weight: 600; color: var(--primary); word-break: break-all; text-align: center; }
 
     /* ─── FOOTER ─── */
     footer {
-      background: var(--primary); color: rgba(255,255,255,0.6);
-      text-align: center; padding: 2rem;
-      font-size: 0.85rem;
+      background: var(--about-bg); color: rgba(255,255,255,0.55);
+      text-align: center; padding: 2rem; font-size: 0.85rem;
+      transition: background 0.35s ease;
     }
     footer span { color: var(--accent); }
 
-    /* ─── ANIMATIONS ─── */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* ─── CUSTOM CURSOR ─── */
+    .custom-cursor, .custom-cursor-ring {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 1000;
+      opacity: 0; transition: opacity 0.2s ease;
     }
-    @keyframes fadeInRight {
-      from { opacity: 0; transform: translateX(30px); }
-      to { opacity: 1; transform: translateX(0); }
+    .custom-cursor { width: 8px; height: 8px; margin-left: -4px; margin-top: -4px; border-radius: 50%; background: var(--accent); }
+    .custom-cursor-ring {
+      width: 36px; height: 36px; margin-left: -18px; margin-top: -18px; border-radius: 50%;
+      border: 1px solid rgba(232,160,32,0.45); background: rgba(232,160,32,0.08);
+      --cursor-scale: 1;
+      transition: transform 0.18s ease, opacity 0.2s ease, background 0.2s ease, border-color 0.2s ease;
     }
+    body.cursor-active .custom-cursor, body.cursor-active .custom-cursor-ring { opacity: 1; }
+    body.cursor-hover .custom-cursor-ring { --cursor-scale: 1.45; background: rgba(232,160,32,0.16); border-color: rgba(232,160,32,0.75); }
 
-    .reveal {
-      opacity: 0; transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ─── RESPONSIVE ─── */
@@ -682,10 +508,7 @@
       .nav-cta { padding: 10px 16px; font-size: 0.82rem; }
     }
     @media (hover: none), (pointer: coarse) {
-      .custom-cursor,
-      .custom-cursor-ring {
-        display: none;
-      }
+      .custom-cursor, .custom-cursor-ring { display: none; }
     }
   </style>
 </head>
@@ -760,7 +583,7 @@
     <div class="hero-float-badge top-left">
       <div class="badge-icon">🏢</div>
       <div>
-        <div style="font-size:0.7rem;color:#888;font-weight:400">Pengalaman</div>
+        <div class="badge-sub">Pengalaman</div>
         <div>Admin &amp; Warehouse</div>
       </div>
     </div>
@@ -770,7 +593,7 @@
     <div class="hero-float-badge bottom-right">
       <div class="badge-icon">📋</div>
       <div>
-        <div style="font-size:0.7rem;color:#888;font-weight:400">Portofolio</div>
+        <div class="badge-sub">Portofolio</div>
         <div>baihaqihasabi.github.io</div>
       </div>
     </div>
@@ -788,7 +611,6 @@
     <span class="ticker-item"><span class="ticker-dot">✦</span> Koordinasi Tim</span>
     <span class="ticker-item"><span class="ticker-dot">✦</span> Data Entry</span>
     <span class="ticker-item"><span class="ticker-dot">✦</span> General Affairs</span>
-    <!-- Duplicate for seamless loop -->
     <span class="ticker-item"><span class="ticker-dot">✦</span> Administrasi Perkantoran</span>
     <span class="ticker-item"><span class="ticker-dot">✦</span> Manajemen Stok &amp; Gudang</span>
     <span class="ticker-item"><span class="ticker-dot">✦</span> Microsoft Office</span>
@@ -815,9 +637,7 @@
       <h3>Microsoft Office</h3>
       <p>Menguasai Microsoft Word, Excel, dan PowerPoint untuk keperluan administrasi, laporan, dan penyusunan dokumen profesional.</p>
       <div class="skill-tags">
-        <span class="skill-tag">Word</span>
-        <span class="skill-tag">Excel</span>
-        <span class="skill-tag">PowerPoint</span>
+        <span class="skill-tag">Word</span><span class="skill-tag">Excel</span><span class="skill-tag">PowerPoint</span>
       </div>
     </div>
     <div class="skill-card reveal" style="transition-delay:0.1s">
@@ -825,9 +645,7 @@
       <h3>Google Workspace</h3>
       <p>Terlatih menggunakan Google Docs, Sheets, dan Drive untuk pengelolaan dokumen terpusat dan kolaborasi tim secara digital.</p>
       <div class="skill-tags">
-        <span class="skill-tag">Google Docs</span>
-        <span class="skill-tag">Google Sheets</span>
-        <span class="skill-tag">Google Drive</span>
+        <span class="skill-tag">Google Docs</span><span class="skill-tag">Google Sheets</span><span class="skill-tag">Google Drive</span>
       </div>
     </div>
     <div class="skill-card reveal" style="transition-delay:0.2s">
@@ -835,9 +653,7 @@
       <h3>Data Entry &amp; Pengarsipan</h3>
       <p>Berpengalaman dalam pencatatan data stok, pengarsipan dokumen digital maupun non-digital, serta sistem filling yang tertib.</p>
       <div class="skill-tags">
-        <span class="skill-tag">Data Entry</span>
-        <span class="skill-tag">Filing System</span>
-        <span class="skill-tag">Arsip Digital</span>
+        <span class="skill-tag">Data Entry</span><span class="skill-tag">Filing System</span><span class="skill-tag">Arsip Digital</span>
       </div>
     </div>
     <div class="skill-card reveal" style="transition-delay:0.3s">
@@ -845,9 +661,7 @@
       <h3>Manajemen Stok &amp; Gudang</h3>
       <p>Berpengalaman mengelola pencatatan stok barang masuk dan keluar, laporan stok harian dan bulanan, serta pelatihan anggota baru.</p>
       <div class="skill-tags">
-        <span class="skill-tag">Stok Barang</span>
-        <span class="skill-tag">Laporan Stok</span>
-        <span class="skill-tag">Warehouse</span>
+        <span class="skill-tag">Stok Barang</span><span class="skill-tag">Laporan Stok</span><span class="skill-tag">Warehouse</span>
       </div>
     </div>
     <div class="skill-card reveal" style="transition-delay:0.4s">
@@ -855,9 +669,7 @@
       <h3>Komunikasi &amp; Koordinasi Tim</h3>
       <p>Terampil berkomunikasi dengan pengurus inti dan pihak eksternal, memastikan kelengkapan dokumen dan kerapian administrasi organisasi.</p>
       <div class="skill-tags">
-        <span class="skill-tag">Komunikasi</span>
-        <span class="skill-tag">Koordinasi</span>
-        <span class="skill-tag">Kerja Tim</span>
+        <span class="skill-tag">Komunikasi</span><span class="skill-tag">Koordinasi</span><span class="skill-tag">Kerja Tim</span>
       </div>
     </div>
     <div class="skill-card reveal" style="transition-delay:0.5s">
@@ -865,9 +677,7 @@
       <h3>Manajemen Waktu &amp; Ketelitian</h3>
       <p>Disiplin mengelola prioritas pekerjaan, tepat waktu dalam pelaporan, serta berorientasi pada detail dalam setiap pekerjaan administrasi.</p>
       <div class="skill-tags">
-        <span class="skill-tag">Time Management</span>
-        <span class="skill-tag">Attention to Detail</span>
-        <span class="skill-tag">Problem Solving</span>
+        <span class="skill-tag">Time Management</span><span class="skill-tag">Attention to Detail</span><span class="skill-tag">Problem Solving</span>
       </div>
     </div>
   </div>
@@ -878,7 +688,6 @@
   <div class="section-eyebrow">Pengalaman</div>
   <h2 class="section-title">Riwayat <em>Pengalaman Kerja</em></h2>
   <div class="exp-grid">
-
     <div class="exp-card reveal">
       <div class="exp-meta">
         <div class="exp-institution">🍢 Arofah Kebab Surabaya</div>
@@ -891,7 +700,6 @@
         <li>Melatih 1–2 anggota baru dalam memahami alur administrasi gudang dan pencatatan stok, sehingga proses adaptasi kerja berjalan lebih cepat dan sesuai prosedur operasional.</li>
       </ul>
     </div>
-
     <div class="exp-card reveal" style="transition-delay:0.15s">
       <div class="exp-meta">
         <div class="exp-institution">📖 IQMA (Qori Qoriah Al-Qur'an)</div>
@@ -905,7 +713,6 @@
         <li>Berkoordinasi dengan ±5–7 pengurus inti untuk memastikan kelengkapan dan kerapian dokumen administrasi organisasi.</li>
       </ul>
     </div>
-
   </div>
 </section>
 
@@ -922,25 +729,12 @@
         Terbiasa menggunakan Microsoft Excel dan Google Workspace untuk memastikan proses administrasi berjalan rapi, terstruktur, dan tepat waktu. Aktif mengikuti pelatihan administrasi perkantoran dan keuangan untuk terus meningkatkan kompetensi.
       </p>
       <div class="about-stats">
-        <div class="stat-card reveal">
-          <span class="stat-number">1+</span>
-          <div class="stat-label">Tahun Pengalaman Kerja</div>
-        </div>
-        <div class="stat-card reveal" style="transition-delay:0.1s">
-          <span class="stat-number">4+</span>
-          <div class="stat-label">Sertifikasi Pelatihan</div>
-        </div>
-        <div class="stat-card reveal" style="transition-delay:0.2s">
-          <span class="stat-number">2</span>
-          <div class="stat-label">Institusi Pengalaman</div>
-        </div>
-        <div class="stat-card reveal" style="transition-delay:0.3s">
-          <span class="stat-number">✦</span>
-          <div class="stat-label">S1 Komunikasi Islam</div>
-        </div>
+        <div class="stat-card reveal"><span class="stat-number">1+</span><div class="stat-label">Tahun Pengalaman Kerja</div></div>
+        <div class="stat-card reveal" style="transition-delay:0.1s"><span class="stat-number">4+</span><div class="stat-label">Sertifikasi Pelatihan</div></div>
+        <div class="stat-card reveal" style="transition-delay:0.2s"><span class="stat-number">2</span><div class="stat-label">Institusi Pengalaman</div></div>
+        <div class="stat-card reveal" style="transition-delay:0.3s"><span class="stat-number">✦</span><div class="stat-label">S1 Komunikasi Islam</div></div>
       </div>
     </div>
-
     <div class="about-visual reveal">
       <div class="about-info-card">
         <div class="about-info-icon">📍</div>
@@ -1010,7 +804,6 @@
     <h2 class="section-title">Pengembangan <em>Kompetensi</em></h2>
   </div>
   <div class="pelatihan-grid">
-
     <div class="pelatihan-card reveal">
       <div class="pelatihan-meta">
         <div class="pelatihan-provider">🎓 Talenesia, Online</div>
@@ -1019,11 +812,10 @@
       <div class="pelatihan-name">Admin GA</div>
       <ul class="pelatihan-list">
         <li>Mengikuti pelatihan administrasi perkantoran untuk mendukung fungsi General Affairs, dengan fokus pada pengelolaan dokumen, arsip, dan komunikasi administrasi secara rapi dan sistematis.</li>
-        <li>Mempelajari dan mempraktikkan penyusunan dokumen serta surat resmi menggunakan Microsoft Word dan Google Docs, termasuk pengaturan format dan struktur dokumen sesuai kaidah administrasi perkantoran.</li>
-        <li>Mempraktikkan pengelolaan komunikasi melalui email, pengarsipan digital–non digital, serta pengoperasian rapat online sebagai bagian dari simulasi administrasi operasional.</li>
+        <li>Mempelajari dan mempraktikkan penyusunan dokumen serta surat resmi menggunakan Microsoft Word dan Google Docs.</li>
+        <li>Mempraktikkan pengelolaan komunikasi melalui email, pengarsipan digital–non digital, serta pengoperasian rapat online.</li>
       </ul>
     </div>
-
     <div class="pelatihan-card reveal" style="transition-delay:0.1s">
       <div class="pelatihan-meta">
         <div class="pelatihan-provider">🎓 Talenesia, Online</div>
@@ -1035,7 +827,6 @@
       </ul>
       <a href="https://bit.ly/45SUZRB" target="_blank" class="cert-link">🔗 Lihat Sertifikat</a>
     </div>
-
     <div class="pelatihan-card reveal" style="transition-delay:0.2s">
       <div class="pelatihan-meta">
         <div class="pelatihan-provider">🎓 Talenesia, Online</div>
@@ -1047,7 +838,6 @@
       </ul>
       <a href="https://bit.ly/4qBd3s0" target="_blank" class="cert-link">🔗 Lihat Sertifikat</a>
     </div>
-
     <div class="pelatihan-card reveal" style="transition-delay:0.3s">
       <div class="pelatihan-meta">
         <div class="pelatihan-provider">🎓 Talenesia, Online</div>
@@ -1059,7 +849,6 @@
       </ul>
       <a href="https://bit.ly/49vMC0A" target="_blank" class="cert-link">🔗 Lihat Sertifikat</a>
     </div>
-
   </div>
 </section>
 
@@ -1131,7 +920,7 @@
   }, { threshold: 0.12 });
   reveals.forEach(el => observer.observe(el));
 
-  // Active nav link
+  // Active nav link highlight
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
   window.addEventListener('scroll', () => {
@@ -1148,10 +937,24 @@
   const storedTheme = localStorage.getItem('theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+  // Moon SVG for light mode (click to go dark), Sun SVG for dark mode (click to go light)
+  const sunSVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M12 3a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1z"/>
+    <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/>
+    <path d="M20 11h-1a1 1 0 1 0 0 2h1a1 1 0 1 0 0-2zM5 11H4a1 1 0 1 0 0 2h1a1 1 0 1 0 0-2z"/>
+    <path d="M17.66 6.34l-.7.7a1 1 0 1 0 1.41 1.41l.7-.7a1 1 0 1 0-1.41-1.41z"/>
+    <path d="M6.64 17.36l-.7.7a1 1 0 0 0 1.41 1.41l.7-.7a1 1 0 1 0-1.41-1.41z"/>
+    <path d="M17.66 17.66a1 1 0 0 0 0 1.41l.7.7a1 1 0 1 0 1.41-1.41l-.7-.7a1 1 0 0 0-1.41 0z"/>
+    <path d="M6.64 6.64a1 1 0 0 0 0 1.41l.7.7A1 1 0 0 0 8.75 7.34l-.7-.7a1 1 0 0 0-1.41 0z"/>
+  </svg>`;
+  const moonSVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </svg>`;
+
   const applyTheme = (isDark) => {
     body.classList.toggle('dark-mode', isDark);
+    themeToggle.innerHTML = isDark ? sunSVG : moonSVG;
     themeToggle.setAttribute('aria-label', isDark ? 'Aktifkan light mode' : 'Aktifkan dark mode');
-    themeToggle.setAttribute('title', isDark ? 'Toggle light mode' : 'Toggle dark mode');
   };
 
   applyTheme(storedTheme ? storedTheme === 'dark' : prefersDark);
@@ -1162,14 +965,12 @@
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   });
 
-  // Cursor animation for non-touch devices
+  // Custom cursor (desktop only)
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     const cursor = document.querySelector('.custom-cursor');
     const ring = document.querySelector('.custom-cursor-ring');
-    let ringX = window.innerWidth / 2;
-    let ringY = window.innerHeight / 2;
-    let mouseX = ringX;
-    let mouseY = ringY;
+    let ringX = window.innerWidth / 2, ringY = window.innerHeight / 2;
+    let mouseX = ringX, mouseY = ringY;
 
     const animateCursor = () => {
       ringX += (mouseX - ringX) * 0.18;
@@ -1179,21 +980,12 @@
       requestAnimationFrame(animateCursor);
     };
 
-    window.addEventListener('mousemove', (event) => {
-      mouseX = event.clientX;
-      mouseY = event.clientY;
-      body.classList.add('cursor-active');
-    });
-
-    window.addEventListener('mouseout', () => {
-      body.classList.remove('cursor-active');
-    });
-
-    document.querySelectorAll('a, button, .skill-card, .exp-card, .pelatihan-card, .kontak-card, .org-card, .stat-card').forEach((el) => {
+    window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; body.classList.add('cursor-active'); });
+    window.addEventListener('mouseout', () => body.classList.remove('cursor-active'));
+    document.querySelectorAll('a, button, .skill-card, .exp-card, .pelatihan-card, .kontak-card, .org-card, .stat-card').forEach(el => {
       el.addEventListener('mouseenter', () => body.classList.add('cursor-hover'));
       el.addEventListener('mouseleave', () => body.classList.remove('cursor-hover'));
     });
-
     animateCursor();
   }
 </script>
