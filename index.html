@@ -321,6 +321,52 @@
       transition: background 0.35s, border-color 0.35s, color 0.35s;
     }
 
+    /* ─── PORTFOLIO ─── */
+    #portfolio { background: var(--white); transition: background 0.35s ease; }
+    .portfolio-header {
+      margin-bottom: 2rem;
+    }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .portfolio-card {
+      background: var(--light-bg); border: 1px solid var(--border); border-radius: 28px;
+      overflow: hidden; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    body.dark-mode .portfolio-card { background: var(--card-bg); }
+    .portfolio-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: 0 16px 50px rgba(0,0,0,0.12);
+    }
+    .portfolio-media {
+      aspect-ratio: 16 / 7.5; overflow: hidden; background: linear-gradient(135deg, var(--green-light), rgba(232,160,32,0.12));
+    }
+    .portfolio-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .portfolio-body { padding: 1.35rem; }
+    .portfolio-topline {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 0.75rem; margin-bottom: 0.9rem; flex-wrap: wrap;
+    }
+    .portfolio-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--tag-bg); border: 1px solid var(--tag-border);
+      color: var(--tag-color); border-radius: 50px; padding: 4px 12px;
+      font-size: 0.75rem; font-weight: 600;
+    }
+    .portfolio-year {
+      font-size: 0.8rem; color: var(--accent); font-weight: 600; letter-spacing: 0.04em;
+    }
+    .portfolio-title {
+      font-family: 'Playfair Display', serif; font-size: 1.15rem;
+      color: var(--primary); margin-bottom: 0.5rem;
+    }
+    .portfolio-role { color: var(--accent); font-size: 0.84rem; font-weight: 600; margin-bottom: 0.75rem; }
+    .portfolio-desc { color: var(--text-muted); font-size: 0.84rem; line-height: 1.65; }
+    .portfolio-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .portfolio-tag {
+      border: 1px solid var(--border); border-radius: 50px; padding: 4px 10px;
+      font-size: 0.74rem; color: var(--text-muted);
+    }
+
     /* ─── PENGALAMAN ─── */
     #pengalaman { background: var(--light-bg); transition: background 0.35s ease; }
     .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
@@ -496,12 +542,14 @@
       .hero-buttons { justify-content: center; }
       .hero-tags { justify-content: center; }
       .skills-grid { grid-template-columns: 1fr 1fr; }
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
       .exp-grid { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .pelatihan-grid { grid-template-columns: 1fr; }
       nav .nav-links { display: none; }
     }
     @media (max-width: 600px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr; }
       .about-stats { grid-template-columns: 1fr 1fr; }
       .nav-actions { gap: 0.5rem; }
@@ -525,6 +573,7 @@
   <ul class="nav-links">
     <li><a href="#hero">Beranda</a></li>
     <li><a href="#keahlian">Keahlian</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#pengalaman">Pengalaman</a></li>
     <li><a href="#tentang">Tentang</a></li>
     <li><a href="#pendidikan">Pendidikan</a></li>
@@ -557,9 +606,9 @@
       Administrative &amp; Warehouse Staff dengan latar belakang S1 Komunikasi dan Penyiaran Islam, berpengalaman dalam pengelolaan data stok, arsip administrasi, serta dukungan operasional harian. Terbiasa menggunakan Microsoft Excel dan Google Workspace untuk memastikan proses administrasi berjalan rapi, terstruktur, dan tepat waktu.
     </p>
     <div class="hero-buttons">
-      <a href="#pengalaman" class="btn-primary">
+      <a href="#portfolio" class="btn-primary">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-        Lihat Pengalaman
+        Lihat Portfolio
       </a>
       <a href="#kontak" class="btn-secondary">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -680,6 +729,132 @@
         <span class="skill-tag">Time Management</span><span class="skill-tag">Attention to Detail</span><span class="skill-tag">Problem Solving</span>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="portfolio-header">
+    <div>
+      <div class="section-eyebrow">Portfolio</div>
+      <h2 class="section-title">Kumpulan <em>Portfolio</em></h2>
+    </div>
+  </div>
+  <div class="portfolio-grid">
+    <article class="portfolio-card reveal">
+      <div class="portfolio-media">
+        <img src="gambar.jpg" alt="Preview portfolio administrasi dan pengelolaan dokumen" />
+      </div>
+      <div class="portfolio-body">
+        <div class="portfolio-topline">
+          <span class="portfolio-label">Administrasi</span>
+          <span class="portfolio-year">2025</span>
+        </div>
+        <h3 class="portfolio-title">Pengelolaan Dokumen Operasional</h3>
+        <div class="portfolio-role">Portfolio 1</div>
+        <p class="portfolio-desc">Contoh portfolio untuk menampilkan pekerjaan administrasi seperti penyusunan dokumen, input data, pengarsipan, dan perapian file kerja. Teks ini masih dummy dan bisa langsung diganti sesuai hasil kerja yang ingin ditonjolkan.</p>
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">Microsoft Excel</span>
+          <span class="portfolio-tag">Microsoft Word</span>
+          <span class="portfolio-tag">Arsip Dokumen</span>
+        </div>
+      </div>
+    </article>
+    <article class="portfolio-card reveal" style="transition-delay:0.1s">
+      <div class="portfolio-media">
+        <img src="gambar.jpg" alt="Preview portfolio laporan dan rekap data" />
+      </div>
+      <div class="portfolio-body">
+        <div class="portfolio-topline">
+          <span class="portfolio-label">Rekap Data</span>
+          <span class="portfolio-year">2024</span>
+        </div>
+        <h3 class="portfolio-title">Rekap Administrasi dan Laporan</h3>
+        <div class="portfolio-role">Portfolio 2</div>
+        <p class="portfolio-desc">Contoh portfolio kedua untuk menampilkan hasil rekap data, laporan rutin, atau template administrasi yang pernah dibuat. Gambar dan isi deskripsi bisa diganti nanti memakai data atau screenshot asli dari client.</p>
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">Google Sheets</span>
+          <span class="portfolio-tag">Data Entry</span>
+          <span class="portfolio-tag">Pelaporan</span>
+        </div>
+      </div>
+    </article>
+    <article class="portfolio-card reveal" style="transition-delay:0.2s">
+      <div class="portfolio-media">
+        <img src="gambar.jpg" alt="Preview portfolio pengarsipan surat dan administrasi kegiatan" />
+      </div>
+      <div class="portfolio-body">
+        <div class="portfolio-topline">
+          <span class="portfolio-label">Arsip Surat</span>
+          <span class="portfolio-year">2024</span>
+        </div>
+        <h3 class="portfolio-title">Pengarsipan Surat dan Dokumen Kegiatan</h3>
+        <div class="portfolio-role">Portfolio 3</div>
+        <p class="portfolio-desc">Contoh portfolio ketiga untuk menampilkan pengelolaan surat masuk dan keluar, pencatatan agenda, serta penyusunan dokumen kegiatan secara rapi dan terstruktur.</p>
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">Administrasi</span>
+          <span class="portfolio-tag">Pengarsipan</span>
+          <span class="portfolio-tag">Dokumen Kegiatan</span>
+        </div>
+      </div>
+    </article>
+    <article class="portfolio-card reveal" style="transition-delay:0.3s">
+      <div class="portfolio-media">
+        <img src="gambar.jpg" alt="Preview portfolio jadwal kerja dan koordinasi operasional" />
+      </div>
+      <div class="portfolio-body">
+        <div class="portfolio-topline">
+          <span class="portfolio-label">Operasional</span>
+          <span class="portfolio-year">2025</span>
+        </div>
+        <h3 class="portfolio-title">Penyusunan Jadwal dan Koordinasi Operasional</h3>
+        <div class="portfolio-role">Portfolio 4</div>
+        <p class="portfolio-desc">Contoh portfolio keempat untuk menampilkan pembuatan jadwal kerja, koordinasi kebutuhan operasional, dan monitoring tugas harian agar alur kerja lebih tertata.</p>
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">Scheduling</span>
+          <span class="portfolio-tag">Koordinasi Tim</span>
+          <span class="portfolio-tag">Monitoring</span>
+        </div>
+      </div>
+    </article>
+    <article class="portfolio-card reveal" style="transition-delay:0.4s">
+      <div class="portfolio-media">
+        <img src="gambar.jpg" alt="Preview portfolio input data dan administrasi stok" />
+      </div>
+      <div class="portfolio-body">
+        <div class="portfolio-topline">
+          <span class="portfolio-label">Data Entry</span>
+          <span class="portfolio-year">2025</span>
+        </div>
+        <h3 class="portfolio-title">Input Data Stok dan Administrasi Gudang</h3>
+        <div class="portfolio-role">Portfolio 5</div>
+        <p class="portfolio-desc">Contoh portfolio kelima untuk menampilkan proses input data stok, pembaruan informasi barang, dan pencocokan data fisik dengan catatan administrasi secara akurat dan rutin.</p>
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">Stok Barang</span>
+          <span class="portfolio-tag">Data Entry</span>
+          <span class="portfolio-tag">Microsoft Excel</span>
+        </div>
+      </div>
+    </article>
+    <article class="portfolio-card reveal" style="transition-delay:0.5s">
+      <div class="portfolio-media">
+        <img src="gambar.jpg" alt="Preview portfolio penyusunan laporan dan dokumentasi kerja" />
+      </div>
+      <div class="portfolio-body">
+        <div class="portfolio-topline">
+          <span class="portfolio-label">Pelaporan</span>
+          <span class="portfolio-year">2024</span>
+        </div>
+        <h3 class="portfolio-title">Penyusunan Laporan dan Dokumentasi Kerja</h3>
+        <div class="portfolio-role">Portfolio 6</div>
+        <p class="portfolio-desc">Contoh portfolio keenam untuk menampilkan pembuatan laporan kerja, dokumentasi aktivitas harian, dan penyajian data pendukung agar informasi lebih mudah dibaca dan ditindaklanjuti.</p>
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">Reporting</span>
+          <span class="portfolio-tag">Dokumentasi</span>
+          <span class="portfolio-tag">Administrasi Harian</span>
+        </div>
+      </div>
+    </article>
   </div>
 </section>
 
